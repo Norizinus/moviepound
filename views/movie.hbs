@@ -32,9 +32,7 @@
                 <div class="new-hashtags">
 
                     <p>Add new hashtags: </p>
-                    {{!-- <form id="hashtag-form"> --}}
                     <input type="text" id="hashtag-input" autocomplete="off">
-                    {{!-- </form> --}}
 
                     <div id="suggestion-hashtags" class="hashtags">
                     </div>
@@ -84,7 +82,7 @@
             });
     }
 
-    document.querySelector(".movielog").onclick = addMovieLog;
+    document.querySelector(".btn-add-log-MD").onclick = addMovieLog;
 
     function addWishlist() {
         axios
@@ -100,7 +98,7 @@
             });
     }
 
-    document.querySelector(".wishlist").onclick = addWishlist;
+    document.querySelector(".btn-wishlist-MD").onclick = addWishlist;
 
 </script>
 

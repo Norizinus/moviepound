@@ -9,13 +9,11 @@ const User = require("../models/User");
 const Hashtag = require("../models/Hashtag");
 
 router.get("/", (req, res, next) => {
-  //console.log("GET request to index.js made");
   res.render("index", { user: req.user });
 });
 
 router.get("/searchMovies", (req, res, next) => {
   //console.log("Searched for a movie");
-  // console.log(req.query.search);
   let searchQuery = req.query.search;
 
   axios
@@ -23,8 +21,6 @@ router.get("/searchMovies", (req, res, next) => {
       `https://api.themoviedb.org/3/search/movie?api_key=${tmdbKEY}&query=${searchQuery}&language=en-US&page=1&include_adult=false`
     )
     .then(response => {
-      console.log(response.data);
-      // res.send(response.data.results);
       res.render("searchResultsMovie", {
         movieResults: response.data.results,
         user: req.user
@@ -42,7 +38,6 @@ router.get("/movies/:id", (req, res, next) => {
       if (hashtagList.length === 0) {
         return;
       }
-      // console.log(hashtagList);
       hashtagList.forEach(hashtag => {
         if (Object.keys(hashtag.movies).includes(`${movieId}`)) {
           movieHashtags.push(hashtag.tag);
@@ -62,9 +57,6 @@ router.get("/movies/:id", (req, res, next) => {
           `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=6cca41f7f8c15f95a4d4a11b0fae6429`
         )
         .then(trailerResponse => {
-          // res.send(trailerResponse.data);
-          // console.log(trailerResponse.data.results.length);
-
           let theTrailer = {};
           if (trailerResponse.data.results.length > 0) {
             theTrailer = trailerResponse.data.results[0];
@@ -170,14 +162,9 @@ const loginCheck = (req, res, next) => {
 };
 
 router.get("/profile", loginCheck, (req, res) => {
-  //console.log(req.user);
-
-  let movieList = req.user.movieLog;
-
   User.findById(req.user._id)
     .populate("movieLog wishList")
     .then(userDoc => {
-      // console.log(userDoc);
       //res.json(userDoc);
       res.render("partials/profile", { user: userDoc });
     })
@@ -203,8 +190,6 @@ router.get("/movielog/:id/delete", loginCheck, (req, res) => {
 
 router.get("/wishlist/:id/delete", loginCheck, (req, res) => {
   const wishmovieId = req.params.id;
-
-  console.log(req.user);
 
   User.updateOne({ _id: req.user._id }, { $pull: { wishList: wishmovieId } })
     .then(response => {

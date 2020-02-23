@@ -1,5 +1,3 @@
-// import { response } from "express";
-
 let hashtag = document.getElementById("hashtag-input");
 let hashtagSuggestions;
 

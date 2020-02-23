@@ -6,7 +6,6 @@ const tmdbKEY = process.env.NORA_KEY;
 
 router.get("/hashtag", (req, res, next) => {
   //   console.log("Query to hashtags made");
-  //   console.log(req.query.hashtag);
   let regex = new RegExp(`^#${req.query.hashtag}`);
   console.log(regex);
 
@@ -45,7 +44,6 @@ router.get("/hashtag/:id", (req, res, next) => {
             hashtag: hashTagDocument,
             movies: cleanMovies,
             user: req.user
-            // user: req.user
           });
         })
         .catch(err => console.log(err));
