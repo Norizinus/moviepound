@@ -38,6 +38,7 @@ function searchForHashtag() {
         hashtagSuggestion.classList.add("hashtag-suggestion");
         hashtagSuggestion.classList.add("new-hashtag");
         hashtagSuggestion.classList.add("hashtag");
+        hashtagSuggestion.classList.add("hashtag-MD");
         hashtagBox.appendChild(hashtagSuggestion);
         hashtagSuggestion.onclick = addHashtagToDatabas;
         return;
@@ -48,6 +49,8 @@ function searchForHashtag() {
         hashtagSuggestion.innerText = hashtag.tag;
         hashtagSuggestion.classList.add("hashtag-suggestion");
         hashtagSuggestion.classList.add("hashtag");
+        hashtagSuggestion.classList.add("hashtag-MD");
+
         hashtagBox.appendChild(hashtagSuggestion);
         hashtagSuggestion.onclick = addHashtagToMovie;
       });
@@ -70,6 +73,8 @@ function addHashtagToMovie(event) {
   document.querySelector(".hashtags").appendChild(addedHashtag);
   addedHashtag.classList.add("hashtag");
   addedHashtag.classList.add("existing-hashtag");
+  addedHashtag.classList.add("hashtag-MD");
+
   console.log(addedHashtag.innerText);
   if (!addedHashtag.innerText.includes("#")) {
     addedHashtag.innerText = "#" + addedHashtag.innerText;

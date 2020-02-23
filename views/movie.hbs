@@ -1,6 +1,7 @@
 <div class="wrapper">
     <div class="container">
         <div class="movie-details">
+            {{#if user}}
             <div class="movie-detail-box">
                 <div class="movie-detail-image-box">
 
@@ -22,16 +23,16 @@
                 </div>
 
                 <div id="existing-hashtags">
-                    <p>USERS' HASHTAGS</p>
+                    <h4>Existing Hashtags</h4>
                     <div class="hashtags">
                         {{#each hashtags}}
-                        <p class="hashtag existing-hashtag">{{this}}</p>
+                        <p class="hashtag existing-hashtag hashtag-MD">{{this}}</p>
                         {{/each}}
                     </div>
                 </div>
                 <div class="new-hashtags">
 
-                    <p>Add new hashtags: </p>
+                    <h4>Add new hashtags: </h4>
                     <input type="text" id="hashtag-input" autocomplete="off">
 
                     <div id="suggestion-hashtags" class="hashtags">
@@ -46,9 +47,20 @@
 
 
             </div>
+            {{else}}
+            <h2>Please <a href="/login">login</a> to the page to use this feature!</h2>
+
+            {{/if }}
+
         </div>
+
     </div>
+
 </div>
+
+
+
+
 
 
 <script>
@@ -69,8 +81,9 @@
     console.log("current movie", currentMovie);
 
     function addMovieLog() {
+        console.log("i was clicked")
         axios
-            .post("http://localhost:3000/movielog", {
+            .post("/movielog", {
                 currentMovie
             })
             .then(response => {
@@ -85,8 +98,9 @@
     document.querySelector(".btn-add-log-MD").onclick = addMovieLog;
 
     function addWishlist() {
+        console.log("i was clicked")
         axios
-            .post("http://localhost:3000/wishlist", {
+            .post("/wishlist", {
                 currentMovie
             })
             .then(response => {
